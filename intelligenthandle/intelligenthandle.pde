@@ -37,7 +37,7 @@ void resetGrid()
     for (int v = 0; v < GRID_HEIGHT; v++)
     {
       Handle h = handles.get(u * GRID_HEIGHT + v);
-      h.moveTo(new PVector(50 + H_SPACE * u, 50 + V_SPACE * v));
+      h.moveTo(new PVector(50 + H_SPACE * u, 50 + V_SPACE * v), false);
     }
   }
 }
@@ -46,6 +46,10 @@ void keyPressed() {
   switch (key) {
   case 'R':
     resetGrid();
+    break;
+  case 'L':
+    if(currentHandle != null)
+      currentHandle.fixed = !currentHandle.fixed;
     break;
   default:  
     break;

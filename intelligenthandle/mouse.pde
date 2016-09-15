@@ -41,7 +41,20 @@ void mouseReleased() {
   }
 }
 
-void moveHandleToPosition(Handle h, PVector p)
+void moveHandleToPosition(Handle handle, PVector p)
 {
-  h.moveTo(p);
+  for (Handle h : handles)
+  {
+    if (h == handle)
+      continue;
+      
+    float d = Math.abs(handle.position.dist(h.position));
+    float strength = 1f / d;
+    
+    PVector delta = p.copy().sub(h.position);
+    h.position.add(delta.mult(strength));
+    h.target = h.position;
+  }
+
+  handle.moveTo(p);
 }

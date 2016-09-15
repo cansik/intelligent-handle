@@ -8,7 +8,7 @@ class Handle
 
   final color INNER_COLOR = color(126, 206, 253);
   final color FIXED_COLOR = color(33, 133, 197);
-  
+
   final float EASING = 0.2;
 
   PVector position;
@@ -29,16 +29,23 @@ class Handle
     grabbed = false;
     fixed = false;
   }
-  
+
   public void update()
   {
-     PVector delta = target.copy().sub(position);
-     position.add(delta.mult(EASING));
+    PVector delta = target.copy().sub(position);
+    position.add(delta.mult(EASING));
   }
-  
+
   public void moveTo(PVector v)
   {
-     target = v;
+    moveTo(v, true);
+  }
+
+  public void moveTo(PVector v, boolean checkFixed)
+  {
+    if (checkFixed && fixed)
+      return;
+    target = v;
   }
 
   public void render()
